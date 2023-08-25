@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./vendor/bootstrap-5.3.1-dist/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <title>README.md Single Page App</title>
+</head>
+<body>
+
+<div class="container" id="readme"></div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="./vendor/jquery-3.7.0/js/jquery-3.7.0.min.js"  crossorigin="anonymous"></script>
+<script src="./vendor/popper-2.11.8/js/popper.min.js" crossorigin="anonymous"></script>
+<script src="./vendor/bootstrap-5.3.1-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="./vendor/commonmark-0.30.0/js/commonmark.js" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+
+        var reader = new commonmark.Parser();
+        var writer = new commonmark.HtmlRenderer();
+        fetch("./README.md")
+            .then((res) => res.text())
+            .then((text) => {
+                var parsed = reader.parse(text)
+                var result = writer.render(parsed);
+                $("#readme").append(result);
+            })
+            .catch((e) => console.error(e));
+    });
+</script>
+</body>
+</html>
